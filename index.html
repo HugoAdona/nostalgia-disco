@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nostalgic Disco • Home</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="shortcut icon"
+      href="assets/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="logo"><a href="index.html">NOSTALGIC DISCO</a></div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="content">
+        <div class="left-col">
+          <h1>
+            LISTEN <br />
+            AND <br />
+            RELIVE.
+          </h1>
+          <p class="tagline">Feel the rhythm, relive the memories.</p>
+        </div>
+
+        <div class="right-col">
+          <div class="music-player">
+            <p>Pick an album</p>
+            <select
+              id="album-selector"
+              class="album-selector"
+              title="Album Selector"
+            >
+              <option value="0">Neon Groove Nights</option>
+              <option value="1">Electric Boogie Fever</option>
+              <option value="2">Starlight Pulse</option>
+            </select>
+            <div class="song-list" id="song-list"></div>
+            <div class="player-controls">
+              <img
+                src="assets/svg/backward.svg"
+                alt="Previous icon"
+                id="prev-button"
+                class="control-btn"
+              />
+              <img src="assets/svg/play.svg" alt="Play icon" id="icon" />
+              <img
+                src="assets/svg/forward.svg"
+                alt="Next icon"
+                id="next-button"
+                class="control-btn"
+              />
+              <img
+                src="assets/svg/repeat.svg"
+                alt="Repeat icon"
+                id="repeat-button"
+                class="control-btn"
+              />
+            </div>
+            <div class="track-info">
+              <p class="track-name" id="track-name">Select a song</p>
+              <p class="artist-name" id="artist-name"></p>
+              <div class="progress-bar">
+                <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
