@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Hamburger menu setup (runs on all pages)
   const hamburger = document.querySelector(".hamburger");
   const navLinks = document.querySelector(".nav-links");
 
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Music player setup (only runs if elements exist, i.e., on index.html)
   const mysound = document.createElement("audio");
   mysound.id = "mysound";
   const audioSource = document.createElement("source");
@@ -38,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const trackName = document.getElementById("track-name");
   const artistName = document.getElementById("artist-name");
 
-  // Only initialize music player if required elements exist
   if (
     icon &&
     progressBar &&
@@ -50,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     trackName &&
     artistName
   ) {
-    // Album data with 6 songs per album, using local file paths
     const albums = [
       {
         name: "Neon Groove Nights",
@@ -161,15 +157,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentAlbumIndex = 0;
     let currentSongIndex = -1;
-    let repeatState = 0; // 0 = no repeat, 1 = repeat one, 2 = repeat album
+    let repeatState = 0;
 
-    // Initialize the player
     function initPlayer() {
       updateSongList();
       albumSelector.value = currentAlbumIndex;
     }
 
-    // Update song list UI
     function updateSongList() {
       songList.innerHTML = "";
       albums[currentAlbumIndex].songs.forEach((song, index) => {
@@ -187,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Load and play a song
     function loadSong() {
       if (currentSongIndex >= 0) {
         const song = albums[currentAlbumIndex].songs[currentSongIndex];
@@ -213,7 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Play/pause toggle
     icon.onclick = function () {
       if (mysound.paused && currentSongIndex >= 0) {
         console.log(
@@ -231,7 +223,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
 
-    // Previous song
     prevButton.onclick = function () {
       if (currentSongIndex > 0) {
         currentSongIndex--;
@@ -241,7 +232,6 @@ document.addEventListener("DOMContentLoaded", function () {
       loadSong();
     };
 
-    // Next song
     nextButton.onclick = function () {
       if (currentSongIndex < albums[currentAlbumIndex].songs.length - 1) {
         currentSongIndex++;
@@ -253,26 +243,24 @@ document.addEventListener("DOMContentLoaded", function () {
       loadSong();
     };
 
-    // Repeat button functionality
     repeatButton.onclick = function () {
       repeatState = (repeatState + 1) % 3;
       updateRepeatButtonIcon();
     };
 
-    // Update repeat button appearance
     function updateRepeatButtonIcon() {
       switch (repeatState) {
-        case 0: // No repeat
+        case 0:
           repeatButton.src = "assets/svg/repeat.svg";
           repeatButton.alt = "No repeat icon";
           repeatButton.classList.remove("active", "repeat-one");
           break;
-        case 1: // Repeat one
+        case 1:
           repeatButton.src = "assets/svg/repeat.svg";
           repeatButton.alt = "Repeat one icon";
           repeatButton.classList.add("active", "repeat-one");
           break;
-        case 2: // Repeat album
+        case 2:
           repeatButton.src = "assets/svg/repeat.svg";
           repeatButton.alt = "Repeat album icon";
           repeatButton.classList.add("active");
@@ -281,7 +269,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Album selection
     albumSelector.onchange = function () {
       currentAlbumIndex = parseInt(this.value);
       currentSongIndex = -1;
@@ -289,7 +276,6 @@ document.addEventListener("DOMContentLoaded", function () {
       loadSong();
     };
 
-    // Progress bar update
     mysound.addEventListener("timeupdate", function () {
       if (mysound.duration) {
         const progress = (mysound.currentTime / mysound.duration) * 100;
@@ -297,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Song ended
     mysound.addEventListener("ended", function () {
       console.log(
         `Song ended: ${currentSongIndex + 1}/${
@@ -305,12 +290,10 @@ document.addEventListener("DOMContentLoaded", function () {
         } in album ${albums[currentAlbumIndex].name}`
       );
       if (repeatState === 1) {
-        // Repeat one
         console.log("Repeating current song.");
         mysound.currentTime = 0;
         mysound.play();
       } else if (repeatState === 2) {
-        // Repeat current album
         console.log("Repeating current album.");
         if (currentSongIndex < albums[currentAlbumIndex].songs.length - 1) {
           currentSongIndex++;
@@ -319,14 +302,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         loadSong();
       } else {
-        // No repeat: play next song or next album
         if (currentSongIndex < albums[currentAlbumIndex].songs.length - 1) {
-          // Play next song in current album
           console.log("Playing next song in current album.");
           currentSongIndex++;
           loadSong();
         } else if (currentAlbumIndex < albums.length - 1) {
-          // Move to first song of next album
           console.log(
             `Moving to next album: ${albums[currentAlbumIndex + 1].name}`
           );
@@ -336,7 +316,6 @@ document.addEventListener("DOMContentLoaded", function () {
           updateSongList();
           loadSong();
         } else {
-          // Last song of last album: stop playback
           console.log("End of last album, stopping playback.");
           currentSongIndex = -1;
           progressBar.style.width = "0%";
@@ -346,7 +325,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Seek functionality
     document
       .querySelector(".progress-bar")
       .addEventListener("click", function (e) {
@@ -356,7 +334,6 @@ document.addEventListener("DOMContentLoaded", function () {
         mysound.currentTime = seekTime;
       });
 
-    // Initialize animations
     window.addEventListener("load", function () {
       const elements = document.querySelectorAll(
         ".left-col h1, .left-col .tagline, .music-player"
@@ -369,7 +346,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-    // Initialize player
     initPlayer();
     updateRepeatButtonIcon();
   }
